@@ -2,19 +2,14 @@ package com.example.firebaseauth
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.text.TextUtils
-import android.view.View
-import android.widget.TextView
 import android.widget.Toast
-
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_login.login
-import kotlinx.android.synthetic.main.activity_register.*
 
 class LoginActivity : AppCompatActivity() {
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,7 +18,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
        signup.setOnClickListener {
-           startActivity(Intent(this@LoginActivity,RegisterActivity::class.java))
+           startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
        }
 
 
@@ -45,23 +40,22 @@ class LoginActivity : AppCompatActivity() {
                             if (task.isSuccessful) {
 
                                 Toast.makeText(
-                                    this,
-                                    "You are logged in successfully",
-                                    Toast.LENGTH_SHORT
+                                        this,
+                                        "You are logged in successfully",
+                                        Toast.LENGTH_SHORT
                                 ).show()
 
                                 val intent = Intent(this, MainActivity::class.java)
                                 intent.flags =
                                     Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                intent.putExtra("User-id", FirebaseAuth.getInstance().currentUser!!.uid)
-                                intent.putExtra("email", email)
+
                                 startActivity(intent)
                                 finish()
                             } else {
                                 Toast.makeText(
-                                    this,
-                                    task.exception!!.message.toString(),
-                                    Toast.LENGTH_SHORT
+                                        this,
+                                        task.exception!!.message.toString(),
+                                        Toast.LENGTH_SHORT
                                 ).show()
                             }
                         }
